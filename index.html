@@ -50,6 +50,18 @@
       font-family: "DM Sans", sans-serif;
       line-height: 1.65;
     }
+    
+  /* FOTO PROFIL: mengatur ukuran, bentuk, dan posisi foto */
+    .profile-photo {
+     width: 100px;
+     height: 100px;
+     object-fit: cover;
+     object-position: center;
+     border-radius: 50%;
+     border: 3px solid #39d9ff;
+     margin-bottom: 24px;
+     display: block;
+    }
 
     /* Menghilangkan garis bawah tautan dan memastikan gambar tidak melewati batas */
     a { color: inherit; text-decoration: none; }
@@ -169,17 +181,6 @@
       top: -75px;
       background: rgba(57,217,255,.12);
     }
-    
-    /* FOTO PROFIL: mengatur ukuran, bentuk, dan posisi foto */
-    .profile-photo {
-      width: 110px;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #39d9ff;
-      display: block;
-      margin-bottom: 24px;
-    }
 
     /* Inisial nama di kotak berwarna */
     .monogram {
@@ -279,6 +280,31 @@
     .track { height: 7px; background: #27314a; border-radius: 10px; overflow: hidden; }
     .fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--purple), var(--cyan)); }
 
+
+    /* =========================================================
+       GRAFIK IPK DAN KARTU TRANSKRIP AKADEMIK
+       Nilai di grafik menggunakan data IPK yang diberikan pemilik.
+       ========================================================= */
+    .academic-summary { display: grid; grid-template-columns: minmax(180px, .7fr) 1.3fr; gap: 20px; margin-bottom: 22px; }
+    .gpa-highlight { padding: 25px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(145deg, rgba(139,124,255,.15), rgba(17,26,46,.8)); }
+    .gpa-highlight .label { color: var(--muted); font-size: .9rem; }
+    .gpa-number { font: 700 clamp(2.5rem, 5vw, 3.7rem)/1.2 "Space Grotesk", sans-serif; margin: 8px 0; }
+    .gpa-note { color: var(--muted); font-size: .85rem; }
+    .chart-panel { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: rgba(17,26,46,.65); }
+    .gpa-chart { height: 245px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; align-items: end; padding: 18px 8px 0; border-bottom: 1px solid var(--line); background: repeating-linear-gradient(to top, transparent 0, transparent 48px, rgba(173,190,230,.12) 49px, transparent 50px); }
+    .bar-column { height: 100%; display: flex; flex-direction: column; justify-content: end; align-items: center; gap: 8px; min-width: 0; }
+    .bar-value { font-size: .78rem; color: var(--text); font-weight: 700; }
+    .gpa-bar { width: min(100%, 54px); min-height: 4px; flex: 0 0 auto; border-radius: 8px 8px 0 0; background: linear-gradient(180deg, var(--cyan), var(--purple)); box-shadow: 0 0 18px rgba(57,217,255,.12); }
+    .bar-label { color: var(--muted); font-size: .75rem; padding: 10px 0 0; }
+    .transcript-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+    .transcript-card { padding: 20px; border: 1px solid var(--line); border-top: 2px solid var(--purple); border-radius: 16px; background: rgba(17,26,46,.78); }
+    .transcript-card h3 { font: 600 1.1rem "Space Grotesk", sans-serif; margin-bottom: 7px; }
+    .transcript-card p { color: var(--muted); font-size: .85rem; margin-bottom: 15px; }
+    .transcript-link { display: block; text-align: center; padding: 9px 12px; border-radius: 9px; background: rgba(57,217,255,.09); border: 1px solid rgba(57,217,255,.28); color: var(--text); font-weight: 700; font-size: .85rem; }
+    .transcript-link:hover { background: rgba(57,217,255,.17); }
+    @media (max-width: 800px) { .academic-summary { grid-template-columns: 1fr; } .transcript-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .transcript-grid { grid-template-columns: 1fr; } .gpa-chart { gap: 6px; height: 210px; } .bar-value { font-size: .68rem; } }
+
     /* =========================================================
        8. BAGIAN TARGET TAHUNAN
        ========================================================= */
@@ -356,6 +382,7 @@
         <a href="#about">Tentang</a>   <!-- Menu menuju bagian Tentang Saya -->
         <a href="#skills">Keahlian</a> <!-- Menu menuju bagian Tech Stack -->
         <a href="#projects">Proyek</a> <!-- Menu menuju daftar proyek -->
+        <a href="#academic">Akademik</a> <!-- Menu menuju grafik IPK dan transkrip -->
         <a href="#contact">Kontak</a>  <!-- Menu menuju bagian kontak -->
       </div>
     </nav>
@@ -394,14 +421,12 @@
       <!-- KARTU PROFIL: ringkasan bidang yang diminati. MI adalah monogram dari nama. -->
       <aside class="hero-card" aria-label="Ringkasan profil">
         <!-- INISIAL: MI adalah singkatan Moh Nurul Iman -->
-        
-      <!-- FOTO PROFIL: menampilkan foto pribadi kamu -->
-      <img
-        class="profile-photo"
-        src="asset/FotoMe.jpeg"
-        alt="Foto profil Moh Nurul Iman"
-      />
-
+        <!-- FOTO PROFIL: ganti nama file sesuai foto kamu -->
+<img
+  src="asset/FotoMe.jpeg"
+  alt="Foto profil Moh Nurul Iman"
+  class="profile-photo"
+/>
         <h2>Web Developer</h2>
         <p>Belajar, membangun, dan terus berkembang melalui proyek nyata.</p>
 
@@ -540,14 +565,60 @@
       </div>
     </section>
 
+
     <!-- =====================================================
-         KONTEN 5: PROGRES BELAJAR
+         KONTEN AKADEMIK: GRAFIK IPK DAN TRANSKRIP SEMESTER 1-6
+         Nilai ditampilkan sesuai data dari pemilik portofolio.
+         ===================================================== -->
+    <section class="wrap" id="academic">
+      <div class="section-head">
+        <div class="eyebrow">04 / Academic journey</div>
+        <h2 class="section-title">Perkembangan Akademik (IPK)</h2>
+        <p class="section-desc">Grafik perkembangan IPK dari semester 1 sampai semester 6, beserta akses transkrip tiap semester.</p>
+      </div>
+
+      <div class="academic-summary">
+        <!-- IPK terakhir ditampilkan sebagai ringkasan utama -->
+        <div class="gpa-highlight">
+          <div class="label">IPK Semester 6</div>
+          <div class="gpa-number">3.87</div>
+          <div class="gpa-note">IPK maksimum 4.00 · Skala visual grafik: 3.50–4.00</div>
+        </div>
+        <!-- Grafik batang memakai skala visual 3.50–4.00 agar perbedaan IPK lebih mudah terlihat. Skala yang dipotong ini dijelaskan agar tidak menyesatkan. -->
+        <div class="chart-panel">
+          <div class="gpa-chart" role="img" aria-label="Grafik IPK semester 1: 3.67, semester 2: 3.84, semester 3: 4.00, semester 4: 4.00, semester 5: 4.00, semester 6: 3.87. Skala visual batang dimulai dari IPK 3.50 dan berakhir pada 4.00.">
+            <div class="bar-column"><span class="bar-value">3.67</span><div class="gpa-bar" style="height:54px" title="IPK 3.67; tinggi relatif dari skala 3.50"></div><span class="bar-label">Sem 1</span></div>
+            <div class="bar-column"><span class="bar-value">3.84</span><div class="gpa-bar" style="height:109px" title="IPK 3.84; tinggi relatif dari skala 3.50"></div><span class="bar-label">Sem 2</span></div>
+            <div class="bar-column"><span class="bar-value">4.00</span><div class="gpa-bar" style="height:160px" title="IPK 4.00; tinggi relatif dari skala 3.50"></div><span class="bar-label">Sem 3</span></div>
+            <div class="bar-column"><span class="bar-value">4.00</span><div class="gpa-bar" style="height:160px" title="IPK 4.00; tinggi relatif dari skala 3.50"></div><span class="bar-label">Sem 4</span></div>
+            <div class="bar-column"><span class="bar-value">4.00</span><div class="gpa-bar" style="height:160px" title="IPK 4.00; tinggi relatif dari skala 3.50"></div><span class="bar-label">Sem 5</span></div>
+            <div class="bar-column"><span class="bar-value">3.87</span><div class="gpa-bar" style="height:118px" title="IPK 3.87; tinggi relatif dari skala 3.50"></div><span class="bar-label">Sem 6</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h3 class="section-title" style="font-size:1.5rem">Transkrip Nilai per Semester</h3>
+      </div>
+      <div class="transcript-grid">
+        <!-- Setiap tombol membuka file PDF semester yang bersangkutan dari folder assets. -->
+        <article class="transcript-card"><h3>Transkrip Semester 1</h3><p>IPK semester: 3.67</p><a class="transcript-link" href="asset/KHS Semester 1.pdf" target="_blank" rel="noopener noreferrer">Lihat Transkrip ↗</a></article>
+        <article class="transcript-card"><h3>Transkrip Semester 2</h3><p>IPK semester: 3.84</p><a class="transcript-link" href="asset/KHS Semester 2.pdf" target="_blank" rel="noopener noreferrer">Lihat Transkrip ↗</a></article>
+        <article class="transcript-card"><h3>Transkrip Semester 3</h3><p>IPK semester: 4.00</p><a class="transcript-link" href="asset/KHS Semester 3.pdf" target="_blank" rel="noopener noreferrer">Lihat Transkrip ↗</a></article>
+        <article class="transcript-card"><h3>Transkrip Semester 4</h3><p>IPK semester: 4.00</p><a class="transcript-link" href="asset/KHS Semester 4.pdf" target="_blank" rel="noopener noreferrer">Lihat Transkrip ↗</a></article>
+        <article class="transcript-card"><h3>Transkrip Semester 5</h3><p>IPK semester: 4.00</p><a class="transcript-link" href="asset/KHS Semester 5.pdf" target="_blank" rel="noopener noreferrer">Lihat Transkrip ↗</a></article>
+        <article class="transcript-card"><h3>Transkrip Semester 6</h3><p>IPK semester: 3.87</p><a class="transcript-link" href="asset/KHS Semester 6.pdf" target="_blank" rel="noopener noreferrer">Lihat Transkrip ↗</a></article>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         KONTEN 6: PROGRES BELAJAR
          Angka persen adalah perkiraan pribadi, bukan penilaian resmi.
          ===================================================== -->
     <!-- SECTION LEARNING: bar kemajuan belajar. Ubah angka teks dan width pada .fill agar sesuai kemampuan terbaru. -->
     <section class="wrap" id="learning">
       <div class="section-head">
-        <div class="eyebrow">04 / Learning journey</div>
+        <div class="eyebrow">05 / Learning journey</div>
         <h2 class="section-title">Sedang saya pelajari.</h2>
         <p class="section-desc">Persentase berikut merupakan perkiraan pribadi, bukan hasil pengukuran resmi.</p>
       </div>
