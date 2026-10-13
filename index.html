@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="id">
+<!-- BAGIAN HEAD: pengaturan halaman, judul, font, dan CSS. -->
+<head>
+  <!-- Pengaturan dasar halaman: karakter, tampilan HP, warna browser, dan deskripsi website -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Portfolio Moh Nurul Iman, mahasiswa Sistem Informasi dan Web Developer.">
+
+  <!-- Judul yang muncul di tab browser -->
+  <title>Moh Nurul Iman | Portfolio</title>
+
+  <!-- LINK FONT: memuat font DM Sans dan Space Grotesk dari Google Fonts.
+       Jika link ini dihapus, website tetap berjalan tetapi memakai font pengganti. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS: mengatur warna, ukuran, jarak, layout, dan tampilan responsif. -->
+  <style>
+    /* =========================================================
+       1. WARNA UTAMA
+       Ubah nilai di sini untuk mengganti warna website.
+       ========================================================= */
+    :root {
+      --bg: #0b1020;       /* Warna latar belakang seluruh halaman */
+      --panel: #111a2e;    /* Warna latar belakang kartu */
+      --text: #edf3ff;     /* Warna teks utama */
+      --muted: #aab6d0;    /* Warna teks sekunder */
+      --purple: #8b7cff;   /* Warna ungu aksen */
+      --cyan: #39d9ff;     /* Warna biru aksen */
+      --line: rgba(173,190,230,.16); /* Warna garis/border */
+    }
+
+    /* Menghitung ukuran elemen agar padding dan border tidak menambah ukuran secara tidak terduga */
+    * { box-sizing: border-box; }
+
+    /* Animasi scroll halus saat menu diklik */
+    html { scroll-behavior: smooth; }
+
+    /* Gaya dasar halaman: latar belakang, font, warna, dan jarak baris */
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(108,99,255,.18), transparent 36rem),
+        radial-gradient(ellipse at 90% 20%, rgba(0,201,255,.10), transparent 32rem),
+        var(--bg);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+    }
+
+    /* Menghilangkan garis bawah tautan dan memastikan gambar tidak melewati batas */
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* Pembungkus konten supaya rapi dan tidak terlalu melebar di layar besar */
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* =========================================================
+       2. MENU NAVIGASI DI BAGIAN ATAS
+       ========================================================= */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 0;
+    }
+
+    /* Logo teks di kiri atas */
+    .brand {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      letter-spacing: -.04em;
+      font-size: 1.1rem;
+    }
+    .brand span { color: var(--cyan); }
+
+    /* Daftar menu di kanan atas */
+    .nav-links { display: flex; gap: 22px; color: var(--muted); font-size: .9rem; }
+    .nav-links a:hover, .text-link:hover { color: var(--cyan); }
+
+    /* =========================================================
+       3. BAGIAN PEMBUKA / HERO
+       ========================================================= */
+    .hero {
+      padding: 82px 0 78px;
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    /* Label kecil seperti "Welcome to my portfolio" */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--cyan);
+      font-weight: 700;
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    /* Titik bercahaya di samping label */
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 18px var(--cyan); }
+
+    /* Mengatur jarak standar elemen judul dan paragraf */
+    h1, h2, h3, p { margin-top: 0; }
+
+    /* Judul besar pada bagian pembuka */
+    h1 {
+      font: 700 clamp(2.8rem, 7vw, 5.5rem)/1.02 "Space Grotesk", sans-serif;
+      letter-spacing: -.065em;
+      margin: 18px 0 22px;
+    }
+
+    /* Efek gradasi pada nama */
+    .gradient {
+      background: linear-gradient(100deg, var(--purple), var(--cyan));
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    /* Paragraf pengenalan */
+    .hero p { color: var(--muted); font-size: 1.08rem; max-width: 610px; }
+
+    /* Baris tombol pada bagian pembuka */
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+    /* Gaya umum untuk tombol/tautan yang terlihat seperti tombol */
+    .btn {
+      padding: 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      transition: transform .2s, border-color .2s;
+    }
+    .btn:hover { transform: translateY(-2px); border-color: var(--cyan); }
+
+    /* Tombol utama dengan warna gradasi */
+    .btn.primary { color: #07111f; border: 0; background: linear-gradient(100deg, var(--purple), var(--cyan)); }
+
+    /* Kartu ringkasan profil di sisi kanan */
+    .hero-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(21,31,55,.95), rgba(14,21,39,.88));
+      box-shadow: 0 24px 70px rgba(0,0,0,.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card:before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      right: -75px;
+      top: -75px;
+      background: rgba(57,217,255,.12);
+    }
+    
+    /* FOTO PROFIL: mengatur ukuran, bentuk, dan posisi foto */
+    .profile-photo {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #39d9ff;
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    /* Inisial nama di kotak berwarna */
+    .monogram {
+      width: 78px;
+      height: 78px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      font: 700 1.65rem "Space Grotesk", sans-serif;
+      color: #07111f;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      margin-bottom: 24px;
+    }
+    .hero-card h2 { font: 600 1.25rem "Space Grotesk", sans-serif; margin-bottom: 5px; }
+    .hero-card p { color: var(--muted); font-size: .92rem; margin-bottom: 22px; }
+
+    /* Empat kotak ringkasan di kartu profil */
+    .mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .mini-stat { background: rgba(255,255,255,.035); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+    .mini-stat strong { display: block; font: 700 1.15rem "Space Grotesk", sans-serif; }
+    .mini-stat span { color: var(--muted); font-size: .78rem; }
+
+    /* =========================================================
+       4. GAYA UMUM SEMUA BAGIAN KONTEN
+       ========================================================= */
+    section { padding: 55px 0; }
+    .section-head { margin-bottom: 28px; }
+    .section-head .eyebrow { margin-bottom: 10px; }
+
+    /* Judul setiap bagian: Tentang, Keahlian, Proyek, dan lainnya */
+    h2.section-title {
+      font: 700 clamp(1.8rem, 4vw, 2.6rem)/1.15 "Space Grotesk", sans-serif;
+      letter-spacing: -.045em;
+      margin-bottom: 10px;
+    }
+    .section-desc { color: var(--muted); max-width: 650px; margin-bottom: 0; }
+
+    /* Tata letak dua kolom untuk bagian tentang saya */
+    .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; }
+
+    /* Gaya kartu umum yang dipakai berulang */
+    .panel { border: 1px solid var(--line); background: rgba(17,26,46,.76); border-radius: 20px; padding: 25px; }
+    .panel p:last-child { margin-bottom: 0; }
+
+    /* Daftar informasi pribadi */
+    .info-list { display: grid; gap: 13px; }
+    .info-row { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .info-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .info-row span { color: var(--muted); }
+
+    /* Label kecil untuk minat dan teknologi */
+    .tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .tag { padding: 7px 11px; border-radius: 9px; background: rgba(139,124,255,.11); border: 1px solid rgba(139,124,255,.22); font-size: .82rem; color: #dcd8ff; }
+
+    /* =========================================================
+       5. BAGIAN KEAHLIAN / TECH STACK
+       ========================================================= */
+    .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .skill-card h3 { font: 600 1.08rem "Space Grotesk", sans-serif; margin-bottom: 8px; }
+    .skill-card p { color: var(--muted); font-size: .9rem; margin-bottom: 0; }
+    .skill-icon { font-size: 1.45rem; margin-bottom: 15px; }
+
+    /* =========================================================
+       6. BAGIAN PROYEK
+       ========================================================= */
+    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .project { overflow: hidden; padding: 0; transition: transform .2s, border-color .2s; }
+    .project:hover { transform: translateY(-4px); border-color: rgba(57,217,255,.45); }
+
+    /* Ilustrasi proyek dibuat dengan CSS, jadi tidak perlu file gambar tambahan */
+    .project-art {
+      min-height: 165px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      background: radial-gradient(circle at 20% 30%, rgba(139,124,255,.38), transparent 45%), linear-gradient(135deg, #17223e, #10172a);
+      border-bottom: 1px solid var(--line);
+    }
+    .project-art .symbol { font-size: 2.7rem; }
+    .project-art small { color: #c1cbea; letter-spacing: .15em; text-transform: uppercase; font-size: .68rem; }
+    .project-body { padding: 23px; }
+    .project-body h3 { font: 600 1.3rem "Space Grotesk", sans-serif; margin-bottom: 9px; }
+    .project-body p { color: var(--muted); font-size: .93rem; }
+    .project-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .project-foot .tags { margin: 0; }
+    .text-link { color: var(--cyan); font-size: .9rem; font-weight: 700; white-space: nowrap; }
+
+    /* =========================================================
+       7. BAGIAN PROGRES BELAJAR
+       ========================================================= */
+    .learning { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .learn-item { padding: 17px 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(17,26,46,.65); }
+    .learn-top { display: flex; justify-content: space-between; gap: 12px; font-weight: 600; margin-bottom: 10px; }
+    .learn-top span:last-child { color: var(--muted); font-size: .85rem; }
+    .track { height: 7px; background: #27314a; border-radius: 10px; overflow: hidden; }
+    .fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--purple), var(--cyan)); }
+
+    /* =========================================================
+       8. BAGIAN TARGET TAHUNAN
+       ========================================================= */
+    .goals { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .goal { display: flex; gap: 11px; align-items: flex-start; padding: 15px; border: 1px solid var(--line); border-radius: 13px; color: #d8e1f6; background: rgba(17,26,46,.55); }
+    .goal span { color: var(--cyan); }
+
+    /* Kutipan motivasi */
+    .quote { text-align: center; padding: 35px 24px; border-radius: 22px; border: 1px solid var(--line); background: linear-gradient(135deg, rgba(139,124,255,.1), rgba(57,217,255,.06)); }
+    .quote p { font: 600 clamp(1.3rem, 3vw, 2rem) "Space Grotesk", sans-serif; letter-spacing: -.03em; margin-bottom: 8px; }
+    .quote small { color: var(--muted); }
+
+    /* =========================================================
+       9. BAGIAN KONTAK DAN FOOTER
+       ========================================================= */
+    .contact { display: flex; align-items: center; justify-content: space-between; gap: 25px; flex-wrap: wrap; }
+    .contact h2 { margin-bottom: 8px; }
+    .contact p { color: var(--muted); margin-bottom: 0; }
+    footer { padding: 28px 0 38px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+
+    /* =========================================================
+       10. RESPONSIVE DESIGN
+       Aturan ini membuat website menyesuaikan ukuran layar.
+       ========================================================= */
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; gap: 30px; padding: 55px 0; }
+      .hero-card { max-width: 500px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .skills { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { gap: 12px; font-size: .8rem; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, 1120px); }
+      .nav { align-items: flex-start; flex-direction: column; gap: 12px; }
+      .nav-links { flex-wrap: wrap; }
+      .skills, .projects, .learning, .goals { grid-template-columns: 1fr; }
+      section { padding: 40px 0; }
+      .panel { padding: 20px; }
+      .info-row { font-size: .9rem; }
+    }
+
+    /* Mengurangi animasi bila pengunjung memilih pengaturan minim gerakan di perangkatnya */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *:before, *:after { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    PANDUAN CEPAT:
+    1. Konten yang terlihat pengunjung ditulis di antara tag HTML, misalnya <h1>, <p>, dan <a>.
+    2. href="#about" adalah link internal menuju elemen yang memiliki id="about".
+    3. href="https://..." adalah link ke website lain.
+    4. href="mailto:..." membuka aplikasi email.
+    5. Komentar HTML ditulis seperti ini dan tidak tampil di website.
+    6. Untuk mengubah tampilan, cari bagian CSS di dalam <style>.
+  -->
+  <!-- =======================================================
+       HEADER: LOGO DAN MENU NAVIGASI
+       href="#about" misalnya berarti saat diklik, browser menuju elemen dengan id="about".
+       ======================================================= -->
+  <!-- HEADER / NAVIGASI: logo di kiri dan menu untuk lompat ke bagian halaman. -->
+  <header class="wrap">
+    <nav class="nav" aria-label="Navigasi utama">
+      <!-- LINK LOGO: klik untuk kembali ke bagian paling atas (id="home") -->
+      <!-- LINK LOGO: href="#home" membawa pengunjung kembali ke bagian paling atas. -->
+      <a class="brand" href="#home">IMAN<span>.</span>DEV</a>
+
+      <!-- LINK MENU: setiap href menuju bagian halaman yang sesuai -->
+      <!-- LINK MENU: setiap href="#..." menuju section dengan id yang sama di bawah. -->
+      <div class="nav-links">
+        <a href="#about">Tentang</a>   <!-- Menu menuju bagian Tentang Saya -->
+        <a href="#skills">Keahlian</a> <!-- Menu menuju bagian Tech Stack -->
+        <a href="#projects">Proyek</a> <!-- Menu menuju daftar proyek -->
+        <a href="#contact">Kontak</a>  <!-- Menu menuju bagian kontak -->
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN: seluruh konten utama website dimulai dari sini. -->
+  <main>
+    <!-- =====================================================
+         KONTEN 1: HERO / PEMBUKA
+         id="home" adalah tujuan link logo di bagian atas.
+         ===================================================== -->
+    <!-- SECTION HOME: judul utama, perkenalan singkat, dan tombol aksi. id="home" dipakai oleh menu/logo. -->
+    <section class="wrap hero" id="home">
+      <div>
+        <!-- TEKS KECIL di atas judul; silakan ubah kalimatnya -->
+        <div class="eyebrow"><span class="dot"></span> Welcome to my portfolio</div>
+
+        <!-- JUDUL UTAMA: ubah nama di bawah jika diperlukan -->
+        <h1>Hi, I'm<br><span class="gradient">Moh Nurul Iman.</span></h1>
+
+        <!-- DESKRIPSI PROFIL: ringkasan tentang diri dan fokus belajar -->
+        <p>Mahasiswa Sistem Informasi yang tertarik pada web development, database, dan desain antarmuka. Saat ini berfokus mengembangkan kemampuan Laravel, Livewire, dan MySQL.</p>
+
+        <div class="actions">
+          <!-- LINK TOMBOL: menggulir halaman ke bagian proyek -->
+          <!-- TOMBOL PROYEK: href="#projects" menggulir halaman ke bagian proyek. -->
+          <a class="btn primary" href="#projects">Jelajahi Proyek <span aria-hidden="true">↗</span></a>
+
+          <!-- LINK EMAIL: membuka aplikasi email dengan alamat tujuan sudah terisi -->
+          <!-- TOMBOL EMAIL: mailto: membuka aplikasi email dengan alamat tujuan terisi. -->
+          <a class="btn" href="mailto:iman.gmoff@gmail.com">Hubungi Saya</a>
+        </div>
+      </div>
+
+      <!-- KARTU RINGKASAN PROFIL di sebelah kanan -->
+      <!-- KARTU PROFIL: ringkasan bidang yang diminati. MI adalah monogram dari nama. -->
+      <aside class="hero-card" aria-label="Ringkasan profil">
+        <!-- INISIAL: MI adalah singkatan Moh Nurul Iman -->
+        
+      <!-- FOTO PROFIL: menampilkan foto pribadi kamu -->
+      <img
+        class="profile-photo"
+        src="asset/FotoMe.jpeg"
+        alt="Foto profil Moh Nurul Iman"
+      />
+
+        <h2>Web Developer</h2>
+        <p>Belajar, membangun, dan terus berkembang melalui proyek nyata.</p>
+
+        <!-- KONTEN STATISTIK SINGKAT: ubah teks di setiap kotak sesuai kebutuhan -->
+        <div class="mini-stats">
+          <div class="mini-stat"><strong>Web</strong><span>Development</span></div>
+          <div class="mini-stat"><strong>Data</strong><span>Database & SQL</span></div>
+          <div class="mini-stat"><strong>UI/UX</strong><span>Interface Design</span></div>
+          <div class="mini-stat"><strong>ID</strong><span>Indonesia</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- =====================================================
+         KONTEN 2: TENTANG SAYA
+         id="about" menjadi tujuan menu "Tentang".
+         ===================================================== -->
+    <!-- SECTION ABOUT: deskripsi diri dan data singkat. Edit teks di dalam section ini sesuai kebutuhan. -->
+    <section class="wrap" id="about">
+      <div class="section-head">
+        <div class="eyebrow">01 / About me</div>
+        <h2 class="section-title">Mengenal saya lebih dekat.</h2>
+        <p class="section-desc">Saya senang mengeksplorasi teknologi dan mengubah ide menjadi aplikasi yang berguna.</p>
+      </div>
+
+      <!-- KARTU DESKRIPSI DAN DAFTAR MINAT -->
+      <div class="about-grid">
+        <div class="panel">
+          <h3>Tentang Saya</h3>
+          <!-- PARAGRAF BIOGRAFI: silakan ganti dengan deskripsi diri sendiri -->
+          <p>Saya Moh Nurul Iman, mahasiswa Sistem Informasi dan web developer yang terus mengembangkan kemampuan di bidang pemrograman, pengelolaan basis data, serta UI/UX. Saya percaya proses belajar terbaik datang dari mencoba, membangun, dan memperbaiki proyek secara berkelanjutan.</p>
+
+          <!-- TAG MINAT: setiap <span class="tag"> adalah satu label -->
+          <div class="tags">
+            <span class="tag">Web Development</span>
+            <span class="tag">Database</span>
+            <span class="tag">UI/UX Design</span>
+            <span class="tag">Technology</span>
+            <span class="tag">Gaming</span>
+          </div>
+        </div>
+
+        <!-- INFORMASI PROFIL: ubah isi <strong> untuk memperbarui data -->
+        <div class="panel info-list">
+          <div class="info-row"><span>Nama</span><strong>Moh Nurul Iman</strong></div>
+          <div class="info-row"><span>Pendidikan</span><strong>Sistem Informasi</strong></div>
+          <div class="info-row"><span>Peran</span><strong>Web Developer</strong></div>
+          <div class="info-row"><span>Lokasi</span><strong>Indonesia</strong></div>
+          <div class="info-row"><span>Fokus saat ini</span><strong>Laravel & MySQL</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         KONTEN 3: KEAHLIAN / TECH STACK
+         id="skills" menjadi tujuan menu "Keahlian".
+         ===================================================== -->
+    <!-- SECTION SKILLS: daftar teknologi dan tools. Ini berupa teks, bukan hasil deteksi otomatis. -->
+    <section class="wrap" id="skills">
+      <div class="section-head">
+        <div class="eyebrow">02 / Tech stack</div>
+        <h2 class="section-title">Teknologi yang saya gunakan.</h2>
+        <p class="section-desc">Beberapa bahasa, framework, dan tools yang sedang saya pelajari dan gunakan.</p>
+      </div>
+
+      <!-- KARTU KEAHLIAN: tambah/hapus satu article jika ingin mengubah jumlah kartu -->
+      <div class="skills">
+        <article class="panel skill-card">
+          <div class="skill-icon">💻</div>
+          <h3>Programming & Framework</h3>
+          <p>HTML, CSS, JavaScript, TypeScript, PHP, Python, Laravel, Flutter, dan Dart.</p>
+        </article>
+        <article class="panel skill-card">
+          <div class="skill-icon">🗄️</div>
+          <h3>Database & Development</h3>
+          <p>MySQL, Git, GitHub, Visual Studio Code, serta pengelolaan source code.</p>
+        </article>
+        <article class="panel skill-card">
+          <div class="skill-icon">🎨</div>
+          <h3>Design & UI/UX</h3>
+          <p>Figma, Photoshop, desain antarmuka, dan perhatian pada pengalaman pengguna.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         KONTEN 4: PROYEK
+         id="projects" menjadi tujuan menu dan tombol "Jelajahi Proyek".
+         ===================================================== -->
+    <!-- SECTION PROJECTS: kartu proyek. Ubah judul, deskripsi, tag teknologi, dan link masing-masing proyek. -->
+    <section class="wrap" id="projects">
+      <div class="section-head">
+        <div class="eyebrow">03 / Selected work</div>
+        <h2 class="section-title">Proyek pilihan.</h2>
+        <p class="section-desc">Proyek yang merepresentasikan pengalaman dan proses belajar saya.</p>
+      </div>
+
+      <div class="projects">
+        <!-- PROYEK 1: LIMITID STORE -->
+        <!-- KARTU PROYEK 1: LimitID Store. Ilustrasi dibuat dengan emoji/CSS agar tidak perlu file gambar. -->
+        <article class="panel project">
+          <!-- ILUSTRASI PROYEK: emoji ini bisa diganti, tidak perlu file gambar terpisah -->
+          <div class="project-art"><span class="symbol" aria-hidden="true">🎮</span><small>Digital game store</small></div>
+          <div class="project-body">
+            <h3>LimitID Store</h3>
+            <p>Website top up game untuk membantu pengguna membeli kebutuhan game secara online.</p>
+            <div class="project-foot">
+              <!-- LABEL TEKNOLOGI yang digunakan pada proyek ini -->
+              <div class="tags"><span class="tag">TypeScript</span><span class="tag">MySQL</span><span class="tag">Web</span></div>
+
+              <!-- LINK PROYEK: saat ini ke profil GitHub karena URL repository LimitID Store belum dikonfirmasi.
+                   Ganti href dengan URL repository LimitID Store yang benar bila sudah tersedia. -->
+              <a class="text-link" href="https://github.com/imans7" target="_blank" rel="noopener noreferrer">Lihat GitHub ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROYEK 2: SISTEM ABSENSI GAMIFIKASI -->
+        <!-- KARTU PROYEK 2: Absensi Gamifikasi. Ganti href jika repository proyek berubah. -->
+        <article class="panel project">
+          <!-- ILUSTRASI PROYEK: emoji grafik untuk mewakili dashboard absensi -->
+          <div class="project-art"><span class="symbol" aria-hidden="true">📊</span><small>Gamified attendance</small></div>
+          <div class="project-body">
+            <h3>Absensi Gamifikasi</h3>
+            <p>Sistem absensi dan aktivitas mahasiswa berbasis gamifikasi untuk mendukung pencatatan kegiatan.</p>
+            <div class="project-foot">
+              <!-- LABEL TEKNOLOGI proyek absensi -->
+              <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+
+              <!-- LINK REPOSITORY GITHUB: membuka repository proyek absensi di tab baru.
+                   target="_blank" membuka tab baru; rel membantu keamanan tautan eksternal. -->
+              <a class="text-link" href="https://github.com/imans7/absensi-gamifikasi" target="_blank" rel="noopener noreferrer">Lihat Proyek ↗</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         KONTEN 5: PROGRES BELAJAR
+         Angka persen adalah perkiraan pribadi, bukan penilaian resmi.
+         ===================================================== -->
+    <!-- SECTION LEARNING: bar kemajuan belajar. Ubah angka teks dan width pada .fill agar sesuai kemampuan terbaru. -->
+    <section class="wrap" id="learning">
+      <div class="section-head">
+        <div class="eyebrow">04 / Learning journey</div>
+        <h2 class="section-title">Sedang saya pelajari.</h2>
+        <p class="section-desc">Persentase berikut merupakan perkiraan pribadi, bukan hasil pengukuran resmi.</p>
+      </div>
+
+      <!-- SETIAP learn-item berisi nama skill, angka persen, dan bar progres.
+           Untuk mengubah panjang bar, samakan angka teks dan nilai width. -->
+      <div class="learning">
+        <div class="learn-item"><div class="learn-top"><span>MySQL</span><span>60%</span></div><div class="track"><div class="fill" style="width:60%"></div></div></div>
+        <div class="learn-item"><div class="learn-top"><span>Livewire</span><span>65%</span></div><div class="track"><div class="fill" style="width:65%"></div></div></div>
+        <div class="learn-item"><div class="learn-top"><span>JavaScript</span><span>80%</span></div><div class="track"><div class="fill" style="width:80%"></div></div></div>
+        <div class="learn-item"><div class="learn-top"><span>Laravel</span><span>65%</span></div><div class="track"><div class="fill" style="width:65%"></div></div></div>
+        <div class="learn-item"><div class="learn-top"><span>UI/UX</span><span>55%</span></div><div class="track"><div class="fill" style="width:55%"></div></div></div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         KONTEN 6: TARGET TAHUN 2026
+         Ubah teks target di dalam setiap .goal sesuai rencana pribadi.
+         ===================================================== -->
+    <!-- SECTION GOALS: target belajar tahun 2026. Tambahkan/hapus elemen .goal sesuai target pribadi. -->
+    <section class="wrap" id="goals">
+      <div class="section-head">
+        <div class="eyebrow">05 / Goals 2026</div>
+        <h2 class="section-title">Target berikutnya.</h2>
+      </div>
+      <div class="goals">
+        <div class="goal"><span>↗</span><div>Membangun lebih banyak proyek Laravel.</div></div>
+        <div class="goal"><span>↗</span><div>Memperdalam penggunaan Livewire.</div></div>
+        <div class="goal"><span>↗</span><div>Meningkatkan kemampuan desain database.</div></div>
+        <div class="goal"><span>↗</span><div>Meningkatkan keterampilan UI/UX.</div></div>
+        <div class="goal"><span>↗</span><div>Membangun aplikasi Flutter.</div></div>
+        <div class="goal"><span>↗</span><div>Berkontribusi pada proyek open-source.</div></div>
+      </div>
+    </section>
+
+    <!-- KONTEN 7: KUTIPAN MOTIVASI -->
+    <!-- SECTION QUOTE: kalimat penutup singkat untuk memperkuat identitas portfolio. -->
+    <section class="wrap">
+      <div class="quote">
+        <p>“Code. Learn. Build. Repeat.”</p>
+        <small>Terima kasih sudah mengunjungi portfolio saya 👋</small>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         KONTEN 8: KONTAK
+         Ganti alamat dan tautan di bawah dengan akun yang benar milikmu.
+         ===================================================== -->
+    <!-- SECTION CONTACT: tombol ke GitHub, email, dan Discord. Periksa alamat setiap tautan sebelum publikasi. -->
+    <section class="wrap" id="contact">
+      <div class="panel contact">
+        <div>
+          <div class="eyebrow">06 / Let's connect</div>
+          <h2 class="section-title">Mari terhubung.</h2>
+          <p>Terbuka untuk berbagi ide, kolaborasi, dan kesempatan belajar bersama.</p>
+        </div>
+        <div class="actions">
+          <!-- LINK GITHUB: membuka profil GitHub di tab baru -->
+          <!-- LINK GITHUB: menuju profil GitHub. target="_blank" membuka tab baru; rel="noopener noreferrer" untuk keamanan. -->
+          <a class="btn primary" href="https://github.com/imans7" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+
+          <!-- LINK EMAIL: mailto membuka aplikasi email untuk mengirim pesan -->
+          <!-- TOMBOL EMAIL: mailto: membuka aplikasi email dengan alamat tujuan terisi. -->
+          <!-- LINK EMAIL: ganti alamat setelah mailto: jika email kamu berubah. -->
+          <a class="btn" href="mailto:iman.gmoff@gmail.com">Email ↗</a>
+
+          <!-- LINK DISCORD: mengarah ke undangan server Discord; pastikan undangan masih aktif -->
+          <!-- LINK DISCORD: ganti URL undangan jika link server sudah tidak berlaku. -->
+          <a class="btn" href="https://discord.gg/FukQxXvX" target="_blank" rel="noopener noreferrer">Discord ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER: teks paling bawah halaman -->
+  <!-- FOOTER: bagian paling bawah. Tahun diperbarui otomatis oleh JavaScript di bawah. -->
+  <footer>
+    <div class="wrap footer-inner">
+      <!-- Tahun akan diperbarui otomatis oleh JavaScript di bawah -->
+      <span>© <span id="year">2026</span> Moh Nurul Iman</span>
+      <span>Dibuat dengan HTML & CSS · Responsive Portfolio</span>
+    </div>
+  </footer>
+
+  <script>
+    // JAVASCRIPT SEDERHANA: memperbarui tahun copyright sesuai tahun saat ini.
+    // Jika tidak membutuhkan tahun otomatis, bagian script ini boleh dihapus.
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
